@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 
 var jobSchema = new mongoose.Schema({
-    title: {type: String, required: true},
+	keyword: String,
+    title: String,
     companyName: String,
-    location: String,
+    location: {type: String, required: true},
     meta: {
         contactPerson: String,
         contactEmail: String,
