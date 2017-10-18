@@ -15,10 +15,11 @@ router.get('/', function(req, res, next) {
   });
  });
 
-router.delete('Favorites', function(req, res, next) {
+router.delete('/Favorites/:id', function(req, res, next) {
+  console.log("id in router.delete: ", req.params.id)
   let deleteId = req.params.id;
   Job.delete(
-    {id: deleteId},
+    {'id': deleteId},
     (err, jobs) => {
       if (err) console.log("err in Job.delete", err)
       console.log(jobs);
@@ -28,3 +29,8 @@ router.delete('Favorites', function(req, res, next) {
 })
 
 module.exports = router;
+
+  //  jobs/favorites XX X
+//  /jobs/favorites XX XX
+  //  favorites XX XX
+//  /favorites XX XX
