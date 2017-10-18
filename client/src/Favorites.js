@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
+var $ = require('jquery');
+
 
 class Favorites extends Component {
 
@@ -25,20 +27,44 @@ class Favorites extends Component {
 
   // }
 
-  deleteFavorite(e) {
-    e.preventDefault();
-    var key = e.target.getAttribute('data-key');
-    var tempId = e.target.getAttribute('data-id');
-    var favorites = this.state.favorites;
-    this.setState({
-      id: tempId
-    });
-    console.log("favorites: ", favorites)
-    console.log("tempId: ", tempId);
-    fetch('/Favorites',
-      {method: 'GET'})
-    }
-
+  // deleteFavorite(e) {
+  //   e.preventDefault();
+  //   var key = e.target.getAttribute('data-key');
+  //   var tempId = e.target.getAttribute('data-id');
+  //   var favorites = this.state.favorites;
+  //   this.setState({
+  //     id: tempId
+  //   });
+  //   console.log("favorites: ", favorites)
+  //   console.log("tempId: ", tempId);
+  //   $.ajax({
+  //     url: '/jobs/Favorites/' + tempId,
+  //     type: 'DELETE',
+  //     success: function(result) {
+  //       console.log("result: ", result);
+  //       fetch('/jobs/Favorites' + tempId, {method: 'DELETE'})
+  //     }
+  //   })
+  //   // fetch('/jobs',
+  //   //   {method: 'DELETE'})
+  //   }
+    deleteFavorite(e) {
+      e.preventDefault();
+      var key = e.target.getAttribute('data-key');
+      var tempId = e.target.getAttribute('data-id');
+      var favorites = this.state.favorites;
+      this.setState({
+        id: tempId
+      });
+      console.log("favorites: ", favorites)
+      console.log("tempId: ", tempId);
+      //  $.support.cors = true;
+         fetch('/jobs/Favorites/' + tempId, {
+              method: 'DELETE'
+       }).then(function(response) {
+         console.log(response);
+       })
+     }
 
 
   render() {
@@ -80,7 +106,7 @@ class Favorites extends Component {
       					</div>
       			  </div>
       			</div>
-            <a data-id={item._id} data-key={index} onClick={this.deleteFavorite} > Remove From Favorites </a>
+            <a data-id={item._id} data-key={index} onClick={this.deleteFavorite} href="/jobs/Favorites/{item._id}"> Remove From Favorites </a>
           </div>
         <p className="text-center">Created By <a href="https://twitter.com/mithicher">Mithicher Baro</a></p>
         </div>
